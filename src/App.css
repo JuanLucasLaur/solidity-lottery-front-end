@@ -1,0 +1,11 @@
+section {
+    margin: 5px 20px;
+}
+
+.entry-form__input {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
