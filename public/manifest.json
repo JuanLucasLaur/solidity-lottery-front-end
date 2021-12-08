@@ -1,0 +1,8 @@
+{
+  "short_name": "Solidity Lottery",
+  "name": "Solidity Lottery Front End",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
