@@ -1,5 +1,5 @@
 import './App.css';
-import React, {FormEventHandler, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import web3 from './web3';
 import lottery from './lottery';
 
@@ -32,7 +32,7 @@ function App() {
         fetchManager();
     }, []);
 
-    const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    const handleSubmit: React.FormEventHandler = async (event) => {
         event.preventDefault();
 
         const accounts = await web3.eth.getAccounts();
@@ -42,9 +42,22 @@ function App() {
         await lottery.methods.enter().send({
             from: accounts[0],
             value: web3.utils.toWei(entryFee, 'ether')
-        })
+        });
 
         setStatus({message: 'Entry successful', ready: true});
+    };
+
+    const pickWinner: React.MouseEventHandler = async (event) => {
+        const accounts = await web3.eth.getAccounts();
+
+        setStatus({message: 'Waiting on transaction success...', ready: false});
+
+        await lottery.methods.pickWinner().send({
+            from: accounts[0]
+        });
+
+        setStatus({message: 'A winner has been picked.', ready: true});
+
     };
 
     return (
@@ -73,8 +86,16 @@ function App() {
                         />
                         <button>Enter</button>
                     </div>) : null}
-                    <strong>{status.message}</strong>
                 </form>
+            </section>
+            <hr/>
+            <section>
+                <h4>Pick a winner</h4>
+                {status.ready ? (<button onClick={pickWinner}>Pick winner</button>) : null}
+            </section>
+            <hr/>
+            <section>
+                <strong>{status.message}</strong>
             </section>
         </>
     );
