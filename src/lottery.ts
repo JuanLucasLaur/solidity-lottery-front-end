@@ -1,8 +1,15 @@
 import web3 from './web3';
 import {AbiItem} from 'web3-utils';
 
-const contractAddress = '0xb82938940941353acAd5143B4C7Dd0FA0Ee62F6e';
+const contractAddress = '0xBa419213248033F253A377eBa259C57DC6445D57';
 const abi: AbiItem[] = [
+    {
+        inputs: [],
+        stateMutability: 'nonpayable',
+        type: 'constructor',
+        constant: undefined,
+        payable: undefined
+    },
     {
         constant: true,
         inputs: [],
